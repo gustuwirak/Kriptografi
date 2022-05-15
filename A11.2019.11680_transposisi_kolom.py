@@ -12,7 +12,7 @@ def cipher_encryption():
     # menetapkan angka ke kata kunci
     kywrd_num_list = keyword_num_assign(key)
 
-    # printing key
+    # mencetak key
     for i in range(len(key)):
         print(key[i], end=" ", flush=True)
     # for
@@ -36,10 +36,12 @@ def cipher_encryption():
 
     # print(msg)
 
+    #menghitung nomor pada baris
     num_of_rows = int(len(msg) / len(key))
 
-    # Convert message ke dalam grid
+    # Convert message ke dalam grid / membuat grid
     arr = [[0] * len(key) for i in range(num_of_rows)]
+    #menulis message ke dalam grid
     z = 0
     for i in range(num_of_rows):
         for j in range(len(key)):
@@ -59,7 +61,7 @@ def cipher_encryption():
 
     print(num_loc)
 
-    # cipher
+    # proses cipher, akan dituliskan huruf perkolom sesuai dengan urutan proses sebelumnya (cipher : SGTRL)
     cipher_text = ""
     k = 0
     for i in range(num_of_rows):
@@ -76,7 +78,7 @@ def cipher_encryption():
 
     print("Cipher Text: {}".format(cipher_text))
 
-
+#jika dalam grid sudah terisi semua oleh cipher, maka akan dilanjut dengan dummy character
 def get_number_location(key, kywrd_num_list):
     num_loc = ""
     for i in range(len(key) + 1):
@@ -88,7 +90,7 @@ def get_number_location(key, kywrd_num_list):
     # for
     return num_loc
 
-
+#didefinisikan sesuai urutan abjad 
 def keyword_num_assign(key):
     alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     kywrd_num_list = list(range(len(key)))
@@ -96,7 +98,7 @@ def keyword_num_assign(key):
     init = 0
     for i in range(len(alpha)):
         for j in range(len(key)):
-            if alpha[i] == key[j]:
+            if alpha[i] == key[j]: #jika ada alfabet yang sama maka akan diurutkan dari kiri ke kanan sesuai pada grid
                 init += 1
                 kywrd_num_list[j] = init
             # if
@@ -112,7 +114,8 @@ def cipher_decryption():
 
     # menetapkan angka ke kata kunci
     kywrd_num_list = keyword_num_assign(key)
-
+    
+    #menghitung nomor pada baris
     num_of_rows = int(len(msg) / len(key))
 
     # mendapatkan lokasi dari angka tersebut
@@ -128,7 +131,7 @@ def cipher_decryption():
 
     # print(arr[6][4])
     # itr = len(msg)
-
+    # mulai dari kolom bernomor 1 dan memasukkan ciphertext
     for i in range(len(msg)):
         d = 0
         if k == len(key):
@@ -144,6 +147,7 @@ def cipher_decryption():
         k += 1
     print()
 
+    #mengekstrak plaintext dari grid per satu baris (satu per satu, baris pertama, baris kedua, dst) 
     for i in range(num_of_rows):
         for j in range(len(key)):
             plain_text += str(arr[i][j])
