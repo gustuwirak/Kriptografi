@@ -79,7 +79,7 @@ def encrypt():
             print("{}{}".format(my_matrix[loc[0]][loc1[1]],my_matrix[loc1[0]][loc[1]]),end=' ')    
         i=i+2        
 
-#dekrypt playfair cipher                 
+#decrypt playfair cipher                 
 def decrypt():  
     msg=str(input("ENTER CIPHER TEXT:"))
     msg=msg.upper()
